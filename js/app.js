@@ -117,11 +117,11 @@ function createProductChart(context) {
 };
 
 function createViewChart() {
-    var clickArray = [];
+    var nameArray = [];
     var viewArray = [];
 
     for(var i = 0; i < productStorage.length; i++) {
-        clickArray.push(productStorage[i].timesClicked);
+        nameArray.push(productStorage[i].name);
         viewArray.push(productStorage[i].timesShown);
     }
     var viewContext = document.getElementById('view-chart').getContext('2d');
@@ -168,8 +168,7 @@ function clickManager(event) {
         selectTwoProdAndRndr();
     } else {
         saveProdDataToLocalStorage();
-        createProductChart();
-        createViewChart();
+        // createViewChart();
     }
 }
 
@@ -178,6 +177,7 @@ function saveProdDataToLocalStorage() {
     localStorage.setItem(PRODUCT_DATA, jsonData);
 }
 
+createProductChart();
 selectTwoProdAndRndr();
 
 var placeholder1 = document.getElementById('placeholder-1');
