@@ -6,6 +6,10 @@ var MAX_CLICK_COUNTER = 20;
 var clickCounter = 0;
 var PRODUCT_DATA = 'product_data';
 
+// function Chart() {
+
+// }
+
 function Product(name, picture) {
     this.name = name;
     this.picture = picture;
@@ -13,6 +17,7 @@ function Product(name, picture) {
     this.timesShown = 0;
     this.markClick = function () {
         this.timesClicked++;
+        this.timesShown++;
     }
     this.render = function(domReference) {
         domReference.src = this.picture;
@@ -75,7 +80,7 @@ function selectTwoProdAndRndr() {
     productStorage[randomProducts[1]].render(placeholder2);
 };
 
-function createProductChart() {
+function createProductChart(context) {
     var nameArray = [];
     var clickArray = [];
 
@@ -111,6 +116,42 @@ function createProductChart() {
     })
 };
 
+function createViewChart() {
+    var clickArray = [];
+    var viewArray = [];
+
+    for(var i = 0; i < productStorage.length; i++) {
+        clickArray.push(productStorage[i].timesClicked);
+        viewArray.push(productStorage[i].timesShown);
+    }
+    var viewContext = document.getElementById('view-chart').getContext('2d');
+    var viewChart = new Chart (viewContext, {
+        type:'bar',
+        data: {
+            labels:viewArray,
+            datasets: [
+                {
+                    label:'product views',
+                    data: viewArray,
+                    backgroundColor: 'rgb(255, 100, 150)',
+                    borderColor: 'rgb(255, 100, 150)',
+                },
+            ],
+        },
+        options: {
+            scales: {
+                yAxes: [
+                    {
+                        ticks: {
+                            beginAtZero: true,
+                        }
+                    },
+                ],
+            }
+        },
+    })
+};
+
 function clickManager(event) {
     clickCounter++;
     if(clickCounter < MAX_CLICK_COUNTER) {
@@ -128,6 +169,7 @@ function clickManager(event) {
     } else {
         saveProdDataToLocalStorage();
         createProductChart();
+        createViewChart();
     }
 }
 
