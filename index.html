@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 
 <html>
-    <head>
-        <title>Select Products</title>
-    </head>
+    <header id='header'>
+        Select Your Favorite Product Of The Two!!
+    </header>
     <body>
-        <img id="placeholder-1" src="./images/"/>
-        <img id="placeholder-2" src="./images/"/>
-        <script src="js/app.js"></script>
+        <img id="placeholder-1" src="./images/" width='400' height='400'/>
+        <img id="placeholder-2" src="./images/" width='400' height='400'/>
+        <canvas id='chart' width='500' height='200'></canvas>
     </body>
     <footer>
-
+        <canvas id='view-chart' width='500' height='200'></canvas>
     </footer>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0/dist/Chart.min.js"></script>
+<script src="js/app.js"></script>
 </html>
